@@ -2,7 +2,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Server } from './../shared/server';
 
-
 @Component({
   selector: 'app-server',
   templateUrl: './server.component.html',
@@ -12,9 +11,31 @@ export class ServerComponent implements OnInit {
 
   constructor() { }
 
-  @Input() serverInput;
+  color: string;
+  buttonText: string;
+
+  @Input() serverInput: Server;
 
   ngOnInit() {
+    this.setServerStatus(this.serverInput.isOnline);
+
   }
 
+  setServerStatus(isOnline: boolean) {
+    if (isOnline) {
+      this.serverInput.isOnline = true;
+      this.color = '#66bb6a';
+      this.buttonText = 'Shut Down';
+    } else {
+      this.serverInput.isOnline = false;
+      this.color = '#ff6b6b';
+      this. buttonText = 'Start';
+    }
+  }
+
+  toggleStatus(onlineStatus: boolean) {
+    console.log(this.serverInput.name, ':' , onlineStatus);
+    // this.serverInput.isOnline = !this.serverInput.isOnline;
+    this.setServerStatus(onlineStatus);
+  }
 }
