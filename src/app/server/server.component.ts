@@ -18,7 +18,6 @@ export class ServerComponent implements OnInit {
 
   ngOnInit() {
     this.setServerStatus(this.serverInput.isOnline);
-
   }
 
   setServerStatus(isOnline: boolean) {
@@ -36,6 +35,6 @@ export class ServerComponent implements OnInit {
   toggleStatus(onlineStatus: boolean) {
     console.log(this.serverInput.name, ':' , onlineStatus);
     // this.serverInput.isOnline = !this.serverInput.isOnline;
-    this.setServerStatus(onlineStatus);
+    this.setServerStatus(!onlineStatus);
   }
 }
