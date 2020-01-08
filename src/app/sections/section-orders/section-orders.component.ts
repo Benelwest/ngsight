@@ -23,7 +23,22 @@ export class SectionOrdersComponent implements OnInit {
           total: 230, placed: new Date(2017, 12, 1), fulfilles: new Date(2017, 12, 3)}
 
   ];
+
   ngOnInit() {
+    this.GetOrders();
   }
+
+  GetOrders(): void {
+   // this._salesData;
+  }
+
+  goToPrevious(): void {
+    console.log('Previous Button Clicked!');
+  }
+
+  goToNext(): void {
+    console.log('Previous Button Clicked!');
+  }
+
 
 }
