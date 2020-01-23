@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from '../../shared/order';
-import { Customer } from '../../shared/customer';
+import { SalesDataService } from '../../services/sales-data.service';
 
 @Component({
   selector: 'app-section-orders',
@@ -9,9 +9,9 @@ import { Customer } from '../../shared/customer';
 })
 export class SectionOrdersComponent implements OnInit {
 
-  constructor() { }
+ constructor(private salesData: SalesDataService) { }
 
-  orders: Order[] = [
+ /*  orders: Order[] = [
     {id: 1, customer:
       {id: 1 , name: 'test33', state: 'CO', email: 'main@example.ch'},
       total: 230, placed: new Date(2017, 12, 1), fulfilles: new Date(2017, 12, 3)},
@@ -21,24 +21,42 @@ export class SectionOrdersComponent implements OnInit {
     {id: 3, customer:
           {id: 2 , name: 'test22dd', state: 'CO', email: 'main@example.ch'},
           total: 230, placed: new Date(2017, 12, 1), fulfilles: new Date(2017, 12, 3)}
+  ]; */
 
-  ];
+  orders: Order[];
+  total = 0;
+  page = 1;
+  limit = 10;
+  loading = false;
 
   ngOnInit() {
-    this.GetOrders();
+    this.getOrders();
   }
 
-  GetOrders(): void {
-   // this._salesData;
+  getOrders(): void {
+    this.salesData.getOrders(this.page, this.limit)
+    .subscribe(res => {
+      console.log('Result from getOrders: ', res);
+      this.orders = res['page']['data'];
+      this.total = res['page'].total;
+      this.loading = false;
+    });
   }
+
 
   goToPrevious(): void {
-    console.log('Previous Button Clicked!');
+    // console.log('Previous Button Clicked!');
+    this.page--;
+    this.getOrders();
   }
 
   goToNext(): void {
-    console.log('Previous Button Clicked!');
+    // onsole.log('Previous Button Clicked!');
+    this.page++;
+    this.getOrders();
   }
-
-
+  goToPage(n: number): void {
+    this.page = n;
+    this.getOrders();
+}
 }
