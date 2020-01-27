@@ -36,9 +36,9 @@ export class SectionOrdersComponent implements OnInit {
   getOrders(): void {
     this.salesData.getOrders(this.page, this.limit)
     .subscribe(res => {
-      console.log('Result from getOrders: ', res);
-      this.orders = res['page']['data'];
-      this.total = res['page'].total;
+      console.log('Result from getOrders:', res);
+      this.orders = res['page'.toString()]['data'.toString()];
+      this.total = res['page'.toString()].total;
       this.loading = false;
     });
   }

@@ -14,7 +14,7 @@ export class SalesDataService {
   getOrders(pageIndex: number, pageSize: number) {
     return this.http.get('http://localhost:5000/api/order/' + pageIndex + '/' + pageSize)
      // .map(res => res.json());
-     // .map((res: Response) => res.json());
+      // .map((res: Response) => res.json());
       .map(res => res);
   }
 }

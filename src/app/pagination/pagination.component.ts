@@ -40,6 +40,9 @@ export class PaginationComponent implements OnInit {
 isLastPage(): boolean {
   return this.perPage * this.page >= this.count;
 }
+getMin(): number {
+  return ((this.perPage * this.page) - this.perPage) + 1;
+}
 
 getMax(): number {
   let max = this.perPage * this.page;
